@@ -41,19 +41,6 @@ public class UserService
 
         return userResponse;
 
-        /*try {
-            savedUser = repository.save(user);
-            userResponsee.setId(String.valueOf(savedUser.getId()));
-            userResponsee.setEmail(savedUser.getEmail());
-            userResponsee.setFirstName(savedUser.getFirstName());
-            userResponsee.setLastName(savedUser.getLastName());
-            userResponsee.setCreated(savedUser.getCreated());
-            userResponsee.setUpdated(savedUser.getUpdated());
-        } catch (Exception e) {
-            System.out.println("Error saving user: " + e.getMessage());
-        }
-       */
-
     }
 
     public UserResponse getUserProfile(String userId) {
