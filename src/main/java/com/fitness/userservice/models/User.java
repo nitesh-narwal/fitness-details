@@ -2,6 +2,8 @@ package com.fitness.userservice.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -12,12 +14,21 @@ public class User {
     @Id
     @GeneratedValue (strategy = GenerationType.UUID )
     private String id;
-    private String name;
+
+    @Column(unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String firstName;
+    private String lastName;
     private String password;
+
+    @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.USER;
 
+    @CreationTimestamp
     private LocalDateTime created;
+    @UpdateTimestamp
     private LocalDateTime updated;
 
 
