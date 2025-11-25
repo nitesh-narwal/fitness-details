@@ -2,10 +2,8 @@ package com.example.activityservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 @Service
@@ -27,7 +25,8 @@ public class UserValidationService {
             return Boolean.TRUE.equals(result);
 
        }catch (WebClientResponseException e){
-           e.printStackTrace();
+           //e.printStackTrace();
+           log.error("Error while validating user {}: {}", userId, e.getMessage(), e);
        }
         return false;
     }

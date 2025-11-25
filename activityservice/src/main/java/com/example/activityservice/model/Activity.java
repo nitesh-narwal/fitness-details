@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-@Document(collation = "activities")
+@Document(collection = "activities")
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,7 +22,7 @@ public class Activity {
     private  String userId;
     private ActivityType  type;
     private Integer duration; // in minutes
-    private String calories;
+    private String calories;   // changed from string to integer
     private LocalDateTime startTime;
 
     @Field("metrics")

@@ -1,6 +1,5 @@
 package com.example.activityservice.config;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ public class WebClientConfig {
     @Bean
     public WebClient userServiceWebClient(WebClient.Builder webClientBuilder) {
         return webClientBuilder
-                .baseUrl("http://USERSERVICE") // Base URL for the user service
+                .baseUrl("http://USER-SERVICE") // Base URL for the user service
                 .build();
     }
 }

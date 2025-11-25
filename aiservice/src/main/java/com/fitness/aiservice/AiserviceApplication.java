@@ -9,7 +9,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 public class AiserviceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AiserviceApplication.class, args);
+
+        SpringApplication.run(AiserviceApplication.class, args);
 	}
 
 }
