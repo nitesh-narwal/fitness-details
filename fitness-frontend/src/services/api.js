@@ -136,15 +136,22 @@ export const updateActivity = async (id, activityData) => {
   return response;
 };
 
+
 /**
  * Delete an activity
- */
+ 
 export const deleteActivity = async (id) => {
   console.log(`[Activity API] Deleting activity ${id} via gateway...`);
   const response = await apiClient.delete(`/api/activities/${id}`);
   console.log('[Activity API] Activity deleted');
   return response;
 };
+*/
+export const deleteActivity = async (activityId) => {
+  const response = await apiClient.delete(`/api/activities/${activityId}`);
+  return response.data;
+};
+
 
 /**
  * Get weekly statistics

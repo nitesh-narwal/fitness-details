@@ -56,6 +56,8 @@ ChartJS.register(
   Filler
 );
 
+import { deleteActivity } from '../services/api';
+
 function ActivityList() {
   const { token, tokenData } = useContext(AuthContext);
   const [activities, setActivities] = useState([]);
@@ -76,6 +78,20 @@ function ActivityList() {
       setTempGoal(goalValue);
     }
   }, []);
+
+  const handleDelete = async (activityId) => {
+  if (window.confirm('Are you sure you want to delete this activity?')) {
+    try {
+      await deleteActivity(activityId);
+      // Refresh the list or remove from state
+      setActivities(activities.filter(a => a.id !== activityId));
+    } catch (error) {
+      console.error('Error deleting activity:', error);
+      alert('Failed to delete activity');
+    }
+  }
+};
+<button onClick={() => handleDelete(activity.id)}>Delete</button>
 
   // Fetch activities
   const fetchActivities = async () => {
