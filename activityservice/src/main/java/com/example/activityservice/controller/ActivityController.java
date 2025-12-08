@@ -4,6 +4,7 @@ import com.example.activityservice.dto.ActivityRequest;
 import com.example.activityservice.dto.ActivityResponse;
 import com.example.activityservice.service.ActivityService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/activities")
 @AllArgsConstructor
+@Slf4j
 public class ActivityController {
     private ActivityService activityService;
 
@@ -28,5 +30,11 @@ public class ActivityController {
 
     }
 
+    @DeleteMapping("/{activityId}")
+    public ResponseEntity<Void> deleteActivity(@PathVariable String activityId, @RequestHeader("X-User-ID") String userId) {
+        log.info("Deleting activity {} for user {}", activityId, userId);
+        activityService.deleteActivity(activityId, userId);
+        return ResponseEntity.noContent().build();
+    }
 
 }
