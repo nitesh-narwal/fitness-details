@@ -24,6 +24,11 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
+    private String phoneNumber;
+    
+    private Boolean emailVerified = false;
+    
+    private String registrationType; // "self-registration" or "admin-created"
 
     @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.USER;

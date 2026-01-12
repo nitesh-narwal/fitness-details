@@ -41,6 +41,8 @@ public class ActivityService {
                 .type(request.getType())
                 .duration(request.getDuration())
                 .calories(request.getCalories())
+                .distance(request.getDistance())
+                .additionalNotes(request.getAdditionalNotes())
                 .startTime(request.getStartTime())
                 .additionalmetrics(request.getAdditionalMetrics())
                 .build();
@@ -107,6 +109,8 @@ public class ActivityService {
         response.setType(activity.getType());
         response.setDuration(activity.getDuration());
         response.setCalories(activity.getCalories());
+        response.setDistance(activity.getDistance());
+        response.setAdditionalNotes(activity.getAdditionalNotes());
         response.setStartTime(activity.getStartTime());
         response.setAdditionalmetrics(activity.getAdditionalmetrics());
         response.setCreatedAt(activity.getCreatedAt());

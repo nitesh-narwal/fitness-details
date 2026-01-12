@@ -2,11 +2,14 @@ package com.fitness.userservice.services;
 
 import com.fitness.userservice.UserRepository;
 import com.fitness.userservice.dto.RegisterRequest;
+import com.fitness.userservice.dto.SelfRegisterReques;
 import com.fitness.userservice.dto.UserResponse;
 import com.fitness.userservice.models.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -73,5 +76,55 @@ public class UserService
     public Boolean existByUserId(String userId) {
         log.info("Calling user service for {}", userId);
         return repository.existsByKeycloakId(userId);
+    }
+
+    public UserResponse syncSelfRegisteredUser(SelfRegisterReques request) {
+        log.info("Syncing self-registered user: {}", request.getEmail());
+        
+        // Check if user already exists by email
+        if (repository.existsByEmail(request.getEmail())) {
+            User existingUser = repository.findByEmail(request.getEmail());
+            log.info("User already exists with email: {}", request.getEmail());
+            return mapToUserResponse(existingUser);
+        }
+
+        // Create new user from self-registration
+        User user = new User();
+        user.setKeycloakId(request.getKeycloakId());
+        user.setEmail(request.getEmail());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setEmailVerified(false);
+        user.setRegistrationType(request.getRegistrationType() != null ? request.getRegistrationType() : "self-registration");
+
+        User savedUser = repository.save(user);
+        log.info("Self-registered user synced successfully: {}", savedUser.getEmail());
+        
+        return mapToUserResponse(savedUser);
+    }
+
+    public void updateEmailVerificationStatus(String keycloakId, boolean verified) {
+        Optional<User> userOpt = repository.findByKeycloakId(keycloakId);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            user.setEmailVerified(verified);
+            repository.save(user);
+            log.info("Email verification status updated for user: {}", keycloakId);
+        } else {
+            log.warn("User not found with keycloakId: {}", keycloakId);
+        }
+    }
+
+    private UserResponse mapToUserResponse(User user) {
+        UserResponse userResponse = new UserResponse();
+        userResponse.setId(user.getId());
+        userResponse.setKeycloakId(user.getKeycloakId());
+        userResponse.setEmail(user.getEmail());
+        userResponse.setFirstName(user.getFirstName());
+        userResponse.setLastName(user.getLastName());
+        userResponse.setCreated(user.getCreated());
+        userResponse.setUpdated(user.getUpdated());
+        return userResponse;
     }
 }

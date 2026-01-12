@@ -8,7 +8,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-            jwk-set-uri: http://localhost:8181/realms/fitness-app/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8181/realms/fitness-app
+          jwk-set-uri: http://localhost:8181/realms/fitness-app/protocol/openid-connect/certs
 
 
   cloud:
@@ -31,7 +32,25 @@ spring:
               predicates:
                 - Path=/api/recommendations/**
 
+            - id: notificationservice
+              uri: lb://NOTIFICATION-SERVICE
+              predicates:
+                - Path=/api/notifications/**
+              filters:
+                - StripPrefix=1
 
+keycloak:
+  auth-server-url: http://localhost:8181
+  realm: fitness-app
+  admin:
+    client-id: admin-cli
+    client-secret: ${KEYCLOAK_ADMIN_PASSWORD}
+    username: admin
+    password: admin
+  registration:
+    enabled: true
+    email-verification-required: true
+    default-role: USER
 
 server:
   port: 8084

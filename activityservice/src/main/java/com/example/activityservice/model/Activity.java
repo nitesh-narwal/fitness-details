@@ -23,6 +23,8 @@ public class Activity {
     private ActivityType  type;
     private Integer duration; // in minutes
     private String calories;   // changed from string to integer
+    private Double distance;
+    private String additionalNotes;
     private LocalDateTime startTime;
 
     @Field("metrics")

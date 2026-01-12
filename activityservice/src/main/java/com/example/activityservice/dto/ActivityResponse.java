@@ -13,6 +13,8 @@ public class ActivityResponse {
     private ActivityType type;
     private Integer duration; // in minutes
     private String calories;
+    private Double distance;
+    private String additionalNotes;
     private LocalDateTime startTime;
 
 

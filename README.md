@@ -227,4 +227,3 @@ If you want, I can:
 - Add a scheduled cleanup job to `activityservice` and a transactional delete implementation.
 
 Tell me which of the above you'd like me to apply and I will make the changes directly in the project.
-

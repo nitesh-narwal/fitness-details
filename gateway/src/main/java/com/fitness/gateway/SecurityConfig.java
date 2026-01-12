@@ -20,7 +20,20 @@ public class SecurityConfig {
     public SecurityWebFilterChain securitySecurityFilterChain(ServerHttpSecurity http) {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
-                .authorizeExchange(exchanges -> exchanges.anyExchange().authenticated())
+                .cors(cors -> cors.configurationSource(crosConfigurationSource()))
+                .authorizeExchange(exchanges -> exchanges
+                        .pathMatchers(
+                                "/api/auth/register",
+                                "/api/auth/login",
+                                "/api/auth/verify-email",
+                                "/api/auth/resend-verification",
+                                "/api/auth/forgot-password",
+                                "/api/auth/reset-password",
+                                "/api/auth/registration-enabled",
+                                "/actuator/**"
+                        ).permitAll()
+                        .pathMatchers("/api/admin/**").hasRole("ADMIN")
+                        .anyExchange().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .build();
 

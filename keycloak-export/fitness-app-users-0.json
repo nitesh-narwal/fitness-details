@@ -1,0 +1,26 @@
+{
+  "realm" : "fitness-app",
+  "users" : [ {
+    "id" : "2fc7199b-e876-4d7b-b0af-feb7aeb09922",
+    "username" : "molesterchootmaster@gmail.com",
+    "firstName" : "Molester",
+    "lastName" : "cute",
+    "email" : "molesterchootmaster@gmail.com",
+    "emailVerified" : true,
+    "enabled" : true,
+    "createdTimestamp" : 1768220336854,
+    "totp" : false,
+    "credentials" : [ {
+      "id" : "4a7b6e3d-6964-4c03-bc5a-73f0cc1e3ecb",
+      "type" : "password",
+      "createdDate" : 1768220338336,
+      "secretData" : "{\"value\":\"zNobQiQdKYXBcRX4TYCJKOtEBUllIZhiU9l1BOlcJ3E=\",\"salt\":\"wBjamK8GUkpTMZdQm1VR8A==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-fitness-app" ],
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}

@@ -1,6 +1,7 @@
 package com.fitness.userservice.controller;
 
 import com.fitness.userservice.dto.RegisterRequest;
+import com.fitness.userservice.dto.SelfRegisterReques;
 import com.fitness.userservice.dto.UserResponse;
 import com.fitness.userservice.services.UserService;
 import jakarta.validation.Valid;
@@ -34,5 +35,19 @@ public class Usercontroller
     public ResponseEntity<Boolean> validateUser(@PathVariable String userId) {
         // Fetch user profile logic here
         return ResponseEntity.ok(userService.existByUserId(userId));
+    }
+
+    @PostMapping("/sync")
+    public ResponseEntity<UserResponse> syncSelfRegisteredUser(@RequestBody SelfRegisterReques request) {
+        // Sync self-registered user from Keycloak to local database
+        return ResponseEntity.ok(userService.syncSelfRegisteredUser(request));
+    }
+
+    @PutMapping("/{keycloakId}/verify-email")
+    public ResponseEntity<Void> updateEmailVerification(
+            @PathVariable String keycloakId,
+            @RequestParam boolean verified) {
+        userService.updateEmailVerificationStatus(keycloakId, verified);
+        return ResponseEntity.ok().build();
     }
 }
