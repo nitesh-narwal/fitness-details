@@ -218,12 +218,6 @@ Contact / Support
 - If you share the exact `application.yml` of the service that keeps failing (e.g. `aiservice/src/main/resources/application.yml`) and the exact methods that build Mongo queries, I can provide exact code fixes.
 
 ---
-
-This README is intentionally practical: it includes immediate fixes for the errors you posted (Eureka connection refused, Mongo `locale` error, UnsatisfiedDependency for `WebClient.Builder`, Kafka bootstrap warnings, port conflicts) and suggestions to improve reliability (transactions, scheduling, circuit breakers).
-
-If you want, I can:
-- Open and inspect the specific files that cause the exceptions and provide exact code-level fixes.
-- Add the `WebClientConfig` bean to the `aiservice` module.
 - Add a scheduled cleanup job to `activityservice` and a transactional delete implementation.
 
 Tell me which of the above you'd like me to apply and I will make the changes directly in the project.
